@@ -9,7 +9,7 @@ public class WorkerController {
 
     @PostMapping(path = "/hello")
     public @ResponseBody String hello(@RequestBody String name) {
-        return "Hello!" + name;
+        return "Hello! " + name;
     }
 
 
