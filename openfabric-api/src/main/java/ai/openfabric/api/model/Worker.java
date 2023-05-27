@@ -20,7 +20,6 @@ public class Worker extends Datable implements Serializable {
     @Getter
     @Setter
     public String id;
-
     public String name;
 
 
