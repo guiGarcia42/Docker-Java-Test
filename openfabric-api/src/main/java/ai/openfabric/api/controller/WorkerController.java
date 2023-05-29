@@ -1,39 +1,36 @@
 package ai.openfabric.api.controller;
 
-import com.github.dockerjava.api.DockerClient;
-import com.github.dockerjava.api.model.Container;
-import com.github.dockerjava.core.DefaultDockerClientConfig;
-import com.github.dockerjava.core.DockerClientConfig;
-import com.github.dockerjava.core.DockerClientImpl;
-import com.github.dockerjava.httpclient5.ApacheDockerHttpClient;
-import com.github.dockerjava.transport.DockerHttpClient;
+import ai.openfabric.api.service.DockerManager;
+import com.github.dockerjava.api.command.InspectContainerResponse;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.Duration;
-import java.util.List;
 
 
 @RestController
 @RequestMapping("${node.api.path}/worker")
 public class WorkerController {
 
-    DockerClientConfig config = DefaultDockerClientConfig.createDefaultConfigBuilder().build();
+    DockerManager dockerManager = new DockerManager();
 
-    DockerHttpClient httpClient = new ApacheDockerHttpClient.Builder()
-            .dockerHost(config.getDockerHost())
-            .sslConfig(config.getSSLConfig())
-            .maxConnections(100)
-            .connectionTimeout(Duration.ofSeconds(30))
-            .responseTimeout(Duration.ofSeconds(45))
-            .build();
+    @PostMapping("/{id}/start")
+    public void startWorker(@PathVariable("id") String workerId) {
+        dockerManager.startContainer(workerId);
+    }
 
-    DockerClient dockerClient = DockerClientImpl.getInstance(config, httpClient);
+    @PostMapping("/{id}/stop")
+    public void stopWorker(@PathVariable("id") String workerId) {
+        dockerManager.stopContainer(workerId);
+    }
 
-    List<Container> containers = dockerClient.listContainersCmd().exec();
+    @GetMapping("/{id}/information")
+    public InspectContainerResponse getWorkerInformation(@PathVariable("id") String workerId) {
+        return dockerManager.inspectContainer(workerId);
+    }
+
 
     @PostMapping(path = "/hello")
     public @ResponseBody String hello(@RequestBody String name) {
-        return "Hello! " + containers;
+
+        return dockerManager.listContainers().toString();
     }
 
 }

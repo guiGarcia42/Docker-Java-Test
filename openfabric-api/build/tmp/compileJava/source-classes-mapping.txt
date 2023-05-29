@@ -6,15 +6,17 @@ ai/openfabric/api/repository/WorkerRepository.java
  ai.openfabric.api.repository.WorkerRepository
 ai/openfabric/api/model/Datable.java
  ai.openfabric.api.model.Datable
-ai/openfabric/api/controller/WorkerController.java
- ai.openfabric.api.controller.WorkerController
+ai/openfabric/api/Application.java
+ ai.openfabric.api.Application
 ai/openfabric/api/config/SwaggerConfig.java
  ai.openfabric.api.config.SwaggerConfig
 ai/openfabric/api/config/CorsConfig.java
  ai.openfabric.api.config.CorsConfig
 ai/openfabric/api/config/WebSecurityConfig.java
  ai.openfabric.api.config.WebSecurityConfig
-ai/openfabric/api/Application.java
- ai.openfabric.api.Application
+ai/openfabric/api/controller/WorkerController.java
+ ai.openfabric.api.controller.WorkerController
+ai/openfabric/api/service/DockerManager.java
+ ai.openfabric.api.service.DockerManager
 ai/openfabric/api/model/Worker.java
  ai.openfabric.api.model.Worker
